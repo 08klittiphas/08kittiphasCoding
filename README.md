@@ -27,3 +27,7 @@
 
 3 ส.ค.69
 คิด mini project
+
+18 สค.69
+ลิ้งเว็บไซต์ weekly money manager
+file:///C:/Users/Bangbowitthayakhom/AppData/Local/Temp/4b6a7d92-2822-489e-a4ff-544e42cdac63_weekly-money-manager.zip.c63/weekly-money-manager/index.html
