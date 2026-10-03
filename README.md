@@ -28,6 +28,10 @@
 3 ส.ค.69
 คิด mini project
 
+
+17 สค. 69
+วันนี้ได้ทำโปรแกรมมินิโปรเจ็คครับ เขียนโค้ดแอปโดยรวมที่ใช้งานได้จริง และสร้าง QR Code
+
 18 สค.69
 ลิ้งเว็บไซต์ weekly money manager
 file:///C:/Users/Bangbowitthayakhom/AppData/Local/Temp/f048a95a-253f-4907-8d14-4e94aac4da30_weekly-money-manager.zip.a30/index.html
