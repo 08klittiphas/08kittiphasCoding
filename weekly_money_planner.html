@@ -1,188 +1,1559 @@
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>จัดสรรเงินรายอาทิตย์</title>
+
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--text:#172033;--muted:#667085;--line:#e7eaf0;--primary:#4f46e5;--primary2:#6366f1;--green:#16a34a;--red:#dc2626;--amber:#d97706;--shadow:0 10px 30px rgba(16,24,40,.08)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,"Noto Sans Thai",system-ui,sans-serif;background:var(--bg);color:var(--text)}
-.container{max-width:1180px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:22px}.brand h1{margin:0 0 4px;font-size:28px}.brand p{margin:0;color:var(--muted)}
-button,input,select{font:inherit}button{border:0;border-radius:10px;padding:11px 16px;cursor:pointer;font-weight:700}.primary{background:var(--primary);color:white}.secondary{background:#eef0ff;color:#3730a3}.danger{background:#fee2e2;color:#991b1b}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow)}.stat .label{color:var(--muted);font-size:13px}.stat .value{font-size:25px;font-weight:800;margin-top:7px}.green{color:var(--green)}.red{color:var(--red)}.amber{color:var(--amber)}
-.layout{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}.card h2{font-size:18px;margin:0 0 15px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px}.field input,.field select{width:100%;padding:11px;border:1px solid #d9dde7;border-radius:10px;background:#fff}.full{grid-column:1/-1}.alloc{display:grid;gap:12px}.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.bar{height:10px;background:#eef0f5;border-radius:99px;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--primary2));border-radius:99px}.small{font-size:12px;color:var(--muted)}.section{margin-top:18px}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.tablewrap{overflow:auto}.history{width:100%;border-collapse:collapse}.history th,.history td{padding:11px 8px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}.history th{color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:25px}.notice{padding:12px;border-radius:10px;background:#f8fafc;color:#475467;font-size:13px;margin-top:12px}.total{font-size:31px;font-weight:900}.pill{padding:5px 9px;border-radius:999px;background:#f1f5f9;font-size:12px;font-weight:700}.modal{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalbox{max-width:520px;width:100%;background:#fff;border-radius:16px;padding:20px;box-shadow:var(--shadow)}@media(max-width:850px){.grid{grid-template-columns:1fr 1fr}.layout{grid-template-columns:1fr}}@media(max-width:520px){.container{padding:14px}.grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.top{align-items:flex-start;flex-direction:column}}
+:root{
+  --bg:#f5f7fb;
+  --card:#fff;
+  --text:#172033;
+  --muted:#667085;
+  --line:#e7eaf0;
+  --primary:#4f46e5;
+  --primary2:#6366f1;
+  --green:#16a34a;
+  --red:#dc2626;
+  --amber:#d97706;
+  --shadow:0 10px 30px rgba(16,24,40,.08)
+}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  font-family:Inter,"Noto Sans Thai",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text)
+}
+
+.container{
+  max-width:1180px;
+  margin:auto;
+  padding:24px
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:center;
+  margin-bottom:22px
+}
+
+.brand h1{
+  margin:0 0 4px;
+  font-size:28px
+}
+
+.brand p{
+  margin:0;
+  color:var(--muted)
+}
+
+button,input,select{
+  font:inherit
+}
+
+button{
+  border:0;
+  border-radius:10px;
+  padding:11px 16px;
+  cursor:pointer;
+  font-weight:700
+}
+
+.primary{
+  background:var(--primary);
+  color:white
+}
+
+.secondary{
+  background:#eef0ff;
+  color:#3730a3
+}
+
+.danger{
+  background:#fee2e2;
+  color:#991b1b
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-bottom:18px
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:18px;
+  box-shadow:var(--shadow)
+}
+
+.stat .label{
+  color:var(--muted);
+  font-size:13px
+}
+
+.stat .value{
+  font-size:25px;
+  font-weight:800;
+  margin-top:7px
+}
+
+.green{
+  color:var(--green)
+}
+
+.red{
+  color:var(--red)
+}
+
+.amber{
+  color:var(--amber)
+}
+
+.layout{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:18px
+}
+
+.card h2{
+  font-size:18px;
+  margin:0 0 15px
+}
+
+.formgrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px
+}
+
+.field label{
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:6px
+}
+
+.field input,
+.field select{
+  width:100%;
+  padding:11px;
+  border:1px solid #d9dde7;
+  border-radius:10px;
+  background:#fff
+}
+
+.full{
+  grid-column:1/-1
+}
+
+.alloc{
+  display:grid;
+  gap:12px
+}
+
+.row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px
+}
+
+.bar{
+  height:10px;
+  background:#eef0f5;
+  border-radius:99px;
+  overflow:hidden
+}
+
+.fill{
+  height:100%;
+  background:linear-gradient(
+    90deg,
+    var(--primary),
+    var(--primary2)
+  );
+  border-radius:99px
+}
+
+.small{
+  font-size:12px;
+  color:var(--muted)
+}
+
+.section{
+  margin-top:18px
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:15px
+}
+
+.tablewrap{
+  overflow:auto
+}
+
+.history{
+  width:100%;
+  border-collapse:collapse
+}
+
+.history th,
+.history td{
+  padding:11px 8px;
+  border-bottom:1px solid var(--line);
+  text-align:left;
+  font-size:13px
+}
+
+.history th{
+  color:var(--muted)
+}
+
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:25px
+}
+
+.notice{
+  padding:12px;
+  border-radius:10px;
+  background:#f8fafc;
+  color:#475467;
+  font-size:13px;
+  margin-top:12px
+}
+
+.total{
+  font-size:31px;
+  font-weight:900
+}
+
+.pill{
+  padding:5px 9px;
+  border-radius:999px;
+  background:#f1f5f9;
+  font-size:12px;
+  font-weight:700
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.45);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px
+}
+
+.modal.show{
+  display:flex
+}
+
+.modalbox{
+  max-width:520px;
+  width:100%;
+  background:#fff;
+  border-radius:16px;
+  padding:20px;
+  box-shadow:var(--shadow)
+}
+
+@media(max-width:850px){
+  .grid{
+    grid-template-columns:1fr 1fr
+  }
+
+  .layout{
+    grid-template-columns:1fr
+  }
+}
+
+@media(max-width:520px){
+  .container{
+    padding:14px
+  }
+
+  .grid{
+    grid-template-columns:1fr
+  }
+
+  .formgrid{
+    grid-template-columns:1fr
+  }
+
+  .full{
+    grid-column:auto
+  }
+
+  .top{
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
 </style>
 </head>
+
 <body>
+
 <div class="container">
-  <header class="top">
-    <div class="brand">
-      <h1>💰 จัดสรรเงินรายอาทิตย์</h1>
-      <p>วางแผนรายรับ แบ่งงบ และติดตามเงินคงเหลือในแต่ละสัปดาห์</p>
-    </div>
-    <div class="actions">
-      <button class="secondary" id="exportBtn">ส่งออกข้อมูล</button>
-      <button class="danger" id="resetBtn">ล้างข้อมูล</button>
-    </div>
-  </header>
 
-  <section class="grid">
-    <div class="card stat"><div class="label">รายรับสัปดาห์นี้</div><div class="value green" id="incomeStat">฿0</div></div>
-    <div class="card stat"><div class="label">งบที่จัดสรร</div><div class="value" id="allocatedStat">฿0</div></div>
-    <div class="card stat"><div class="label">ใช้ไปแล้ว</div><div class="value red" id="spentStat">฿0</div></div>
-    <div class="card stat"><div class="label">คงเหลือ</div><div class="value amber" id="balanceStat">฿0</div></div>
-  </section>
+<header class="top">
 
-  <div class="layout">
-    <main>
-      <section class="card">
-        <h2>ตั้งค่ารายรับและสัปดาห์</h2>
-        <div class="formgrid">
-          <div class="field"><label>รายรับต่อสัปดาห์ (บาท)</label><input id="income" type="number" min="0" step="0.01" placeholder="เช่น 5000"></div>
-          <div class="field"><label>วันที่เริ่มสัปดาห์</label><input id="weekStart" type="date"></div>
-          <div class="field"><label>เงินสำรองฉุกเฉิน (%)</label><input id="emergency" type="number" min="0" max="100" step="1" value="10"></div>
-          <div class="field"><label>เงินออม (%)</label><input id="saving" type="number" min="0" max="100" step="1" value="20"></div>
-          <div class="field"><label>ค่าใช้จ่ายจำเป็น (%)</label><input id="needs" type="number" min="0" max="100" step="1" value="50"></div>
-          <div class="field"><label>เงินใช้จ่ายยืดหยุ่น (%)</label><input id="wants" type="number" min="0" max="100" step="1" value="20"></div>
-        </div>
-        <div class="notice" id="percentNotice">รวมสัดส่วน: 100%</div>
-        <div class="actions">
-          <button class="primary" id="calculateBtn">คำนวณการจัดสรร</button>
-          <button class="secondary" id="savePlanBtn">บันทึกแผนสัปดาห์นี้</button>
-        </div>
-      </section>
+<div class="brand">
 
-      <section class="card section">
-        <h2>การจัดสรรเงิน</h2>
-        <div class="alloc" id="allocations"></div>
-      </section>
+<h1>💰 จัดสรรเงินรายอาทิตย์</h1>
 
-      <section class="card section">
-        <h2>บันทึกรายจ่าย</h2>
-        <div class="formgrid">
-          <div class="field"><label>รายการ</label><input id="expenseName" placeholder="เช่น ค่าอาหาร"></div>
-          <div class="field"><label>จำนวนเงิน</label><input id="expenseAmount" type="number" min="0" step="0.01" placeholder="0"></div>
-          <div class="field"><label>หมวดหมู่</label>
-            <select id="expenseCategory">
-              <option value="needs">ค่าใช้จ่ายจำเป็น</option>
-              <option value="wants">ใช้จ่ายยืดหยุ่น</option>
-              <option value="saving">เงินออม</option>
-              <option value="emergency">เงินสำรองฉุกเฉิน</option>
-            </select>
-          </div>
-          <div class="field"><label>วันที่</label><input id="expenseDate" type="date"></div>
-        </div>
-        <div class="actions"><button class="primary" id="addExpenseBtn">+ เพิ่มรายจ่าย</button></div>
-      </section>
+<p>
+วางแผนรายรับ แบ่งงบ และติดตามเงินคงเหลือในแต่ละสัปดาห์
+</p>
 
-      <section class="card section">
-        <h2>รายการรายจ่าย</h2>
-        <div class="tablewrap">
-          <table class="history"><thead><tr><th>วันที่</th><th>รายการ</th><th>หมวด</th><th>จำนวน</th><th></th></tr></thead>
-          <tbody id="expenseTable"></tbody></table>
-        </div>
-      </section>
-    </main>
-
-    <aside>
-      <section class="card">
-        <h2>สรุปแผน</h2>
-        <div class="small">เงินที่พร้อมจัดสรร</div>
-        <div class="total" id="readyMoney">฿0</div>
-        <div class="section" id="summaryRows"></div>
-      </section>
-      <section class="card section">
-        <h2>ประวัติแผน</h2>
-        <div class="tablewrap"><table class="history"><thead><tr><th>สัปดาห์</th><th>รายรับ</th><th>คงเหลือ</th><th></th></tr></thead><tbody id="planHistory"></tbody></table></div>
-      </section>
-    </aside>
-  </div>
 </div>
 
-<div class="modal" id="modal"><div class="modalbox"><h2>ข้อมูลพร้อมส่งออก</h2><p class="small">ระบบจะดาวน์โหลดข้อมูลทั้งหมดเป็นไฟล์ JSON เพื่อสำรองหรือย้ายข้อมูล</p><div class="actions"><button class="primary" id="downloadJson">ดาวน์โหลด</button><button class="secondary" id="closeModal">ปิด</button></div></div></div>
+<div class="actions">
+
+<button class="secondary" id="exportBtn">
+ส่งออกข้อมูล
+</button>
+
+<button class="danger" id="resetBtn">
+ล้างข้อมูล
+</button>
+
+</div>
+
+</header>
+
+
+<section class="grid">
+
+<div class="card stat">
+
+<div class="label">
+รายรับสัปดาห์นี้
+</div>
+
+<div class="value green" id="incomeStat">
+฿0
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="label">
+งบที่จัดสรร
+</div>
+
+<div class="value" id="allocatedStat">
+฿0
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="label">
+ใช้ไปแล้ว
+</div>
+
+<div class="value red" id="spentStat">
+฿0
+</div>
+
+</div>
+
+
+<div class="card stat">
+
+<div class="label">
+คงเหลือ
+</div>
+
+<div class="value amber" id="balanceStat">
+฿0
+</div>
+
+</div>
+
+</section>
+
+
+<div class="layout">
+
+<main>
+
+<section class="card">
+
+<h2>
+ตั้งค่ารายรับและสัปดาห์
+</h2>
+
+<div class="formgrid">
+
+<div class="field">
+
+<label>
+รายรับต่อสัปดาห์ (บาท)
+</label>
+
+<input
+id="income"
+type="number"
+min="0"
+step="0.01"
+placeholder="เช่น 5000">
+
+</div>
+
+
+<div class="field">
+
+<label>
+วันที่เริ่มสัปดาห์
+</label>
+
+<input
+id="weekStart"
+type="date">
+
+</div>
+
+
+<div class="field">
+
+<label>
+เงินสำรองฉุกเฉิน (%)
+</label>
+
+<input
+id="emergency"
+type="number"
+min="0"
+max="100"
+step="1"
+value="10">
+
+</div>
+
+
+<div class="field">
+
+<label>
+เงินออม (%)
+</label>
+
+<input
+id="saving"
+type="number"
+min="0"
+max="100"
+step="1"
+value="20">
+
+</div>
+
+
+<div class="field">
+
+<label>
+ค่าใช้จ่ายจำเป็น (%)
+</label>
+
+<input
+id="needs"
+type="number"
+min="0"
+max="100"
+step="1"
+value="50">
+
+</div>
+
+
+<div class="field">
+
+<label>
+เงินใช้จ่ายยืดหยุ่น (%)
+</label>
+
+<input
+id="wants"
+type="number"
+min="0"
+max="100"
+step="1"
+value="20">
+
+</div>
+
+</div>
+
+
+<div class="notice" id="percentNotice">
+รวมสัดส่วน: 100%
+</div>
+
+
+<div class="actions">
+
+<button class="primary" id="calculateBtn">
+คำนวณการจัดสรร
+</button>
+
+<button class="secondary" id="savePlanBtn">
+บันทึกแผนสัปดาห์นี้
+</button>
+
+</div>
+
+</section>
+
+
+<section class="card section">
+
+<h2>
+การจัดสรรเงิน
+</h2>
+
+<div class="alloc" id="allocations">
+</div>
+
+</section>
+
+
+<section class="card section">
+
+<h2>
+บันทึกรายจ่าย
+</h2>
+
+<div class="formgrid">
+
+<div class="field">
+
+<label>
+รายการ
+</label>
+
+<input
+id="expenseName"
+placeholder="เช่น ค่าอาหาร">
+
+</div>
+
+
+<div class="field">
+
+<label>
+จำนวนเงิน
+</label>
+
+<input
+id="expenseAmount"
+type="number"
+min="0"
+step="0.01"
+placeholder="0">
+
+</div>
+
+
+<div class="field">
+
+<label>
+หมวดหมู่
+</label>
+
+<select id="expenseCategory">
+
+<option value="needs">
+ค่าใช้จ่ายจำเป็น
+</option>
+
+<option value="wants">
+ใช้จ่ายยืดหยุ่น
+</option>
+
+<option value="saving">
+เงินออม
+</option>
+
+<option value="emergency">
+เงินสำรองฉุกเฉิน
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+วันที่
+</label>
+
+<input
+id="expenseDate"
+type="date">
+
+</div>
+
+</div>
+
+
+<div class="actions">
+
+<button class="primary" id="addExpenseBtn">
++ เพิ่มรายจ่าย
+</button>
+
+</div>
+
+</section>
+
+
+<section class="card section">
+
+<h2>
+รายการรายจ่าย
+</h2>
+
+<div class="tablewrap">
+
+<table class="history">
+
+<thead>
+
+<tr>
+
+<th>วันที่</th>
+<th>รายการ</th>
+<th>หมวด</th>
+<th>จำนวน</th>
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody id="expenseTable">
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</main>
+
+
+<aside>
+
+<section class="card">
+
+<h2>
+สรุปแผน
+</h2>
+
+<div class="small">
+เงินที่พร้อมจัดสรร
+</div>
+
+<div class="total" id="readyMoney">
+฿0
+</div>
+
+<div class="section" id="summaryRows">
+</div>
+
+</section>
+
+
+<section class="card section">
+
+<h2>
+ประวัติแผน
+</h2>
+
+<div class="tablewrap">
+
+<table class="history">
+
+<thead>
+
+<tr>
+
+<th>สัปดาห์</th>
+<th>รายรับ</th>
+<th>คงเหลือ</th>
+<th></th>
+
+</tr>
+
+</thead>
+
+<tbody id="planHistory">
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+</aside>
+
+</div>
+
+</div>
+
+
+<div class="modal" id="modal">
+
+<div class="modalbox">
+
+<h2>
+ข้อมูลพร้อมส่งออก
+</h2>
+
+<p class="small">
+ระบบจะดาวน์โหลดข้อมูลทั้งหมดเป็นไฟล์ JSON
+เพื่อสำรองหรือย้ายข้อมูล
+</p>
+
+<div class="actions">
+
+<button class="primary" id="downloadJson">
+ดาวน์โหลด
+</button>
+
+<button class="secondary" id="closeModal">
+ปิด
+</button>
+
+</div>
+
+</div>
+
+</div>
+
 
 <script>
+
 const KEY="weekly-money-planner-v1";
+
+
 const cats={
-  emergency:{label:"เงินสำรองฉุกเฉิน",color:""},
-  saving:{label:"เงินออม",color:""},
-  needs:{label:"ค่าใช้จ่ายจำเป็น",color:""},
-  wants:{label:"ใช้จ่ายยืดหยุ่น",color:""}
+
+emergency:{
+label:"เงินสำรองฉุกเฉิน",
+color:""
+},
+
+saving:{
+label:"เงินออม",
+color:""
+},
+
+needs:{
+label:"ค่าใช้จ่ายจำเป็น",
+color:""
+},
+
+wants:{
+label:"ใช้จ่ายยืดหยุ่น",
+color:""
+}
+
 };
-let state=JSON.parse(localStorage.getItem(KEY)||"null")||{
-  income:5000,weekStart:new Date().toISOString().slice(0,10),
-  percentages:{emergency:10,saving:20,needs:50,wants:20},
-  expenses:[],plans:[]
+
+
+let state=
+JSON.parse(localStorage.getItem(KEY)||"null")
+||
+{
+
+income:5000,
+
+weekStart:
+new Date()
+.toISOString()
+.slice(0,10),
+
+percentages:{
+emergency:10,
+saving:20,
+needs:50,
+wants:20
+},
+
+expenses:[],
+
+plans:[]
+
 };
-const $=id=>document.getElementById(id);
-const money=n=>new Intl.NumberFormat("th-TH",{style:"currency",currency:"THB",maximumFractionDigits:2}).format(Number(n)||0);
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+
+
+const $=
+id=>
+document.getElementById(id);
+
+
+const money=
+n=>
+new Intl.NumberFormat(
+"th-TH",
+{
+style:"currency",
+currency:"THB",
+maximumFractionDigits:2
+}
+)
+.format(Number(n)||0);
+
+
+function save(){
+
+localStorage.setItem(
+KEY,
+JSON.stringify(state)
+);
+
+}
+
+
 function getPerc(){
-  return {emergency:+$("emergency").value||0,saving:+$("saving").value||0,needs:+$("needs").value||0,wants:+$("wants").value||0};
+
+return {
+
+emergency:+$("emergency").value||0,
+
+saving:+$("saving").value||0,
+
+needs:+$("needs").value||0,
+
+wants:+$("wants").value||0
+
+};
+
 }
+
+
 function updateNotice(){
-  const p=getPerc(), total=Object.values(p).reduce((a,b)=>a+b,0);
-  $("percentNotice").textContent=`รวมสัดส่วน: ${total}% ${total===100?"✓":"— ต้องรวมให้ได้ 100%"}`;
-  $("percentNotice").style.background=total===100?"#ecfdf3":"#fffbeb";
+
+const p=getPerc();
+
+const total=
+Object
+.values(p)
+.reduce(
+(a,b)=>a+b,
+0
+);
+
+$("percentNotice")
+.textContent=
+`รวมสัดส่วน: ${total}%
+${total===100?"✓":"— ต้องรวมให้ได้ 100%"}`;
+
+$("percentNotice")
+.style.background=
+total===100
+?"#ecfdf3"
+:"#fffbeb";
+
 }
+
+
 function allocations(){
-  const p=getPerc(), income=+$("income").value||0;
-  return Object.fromEntries(Object.entries(p).map(([k,v])=>[k,income*v/100]));
+
+const p=getPerc();
+
+const income=
++$("income").value||0;
+
+return Object.fromEntries(
+
+Object.entries(p)
+.map(
+([k,v])=>
+[k,income*v/100]
+)
+
+);
+
 }
+
+
 function calc(){
-  const p=getPerc(), total=Object.values(p).reduce((a,b)=>a+b,0);
-  if(total!==100){alert("กรุณาปรับสัดส่วนให้รวมเท่ากับ 100%");return}
-  state.income=+$("income").value||0; state.weekStart=$("weekStart").value; state.percentages=p; save(); render();
+
+const p=getPerc();
+
+const total=
+Object
+.values(p)
+.reduce(
+(a,b)=>a+b,
+0
+);
+
+if(total!==100){
+
+alert(
+"กรุณาปรับสัดส่วนให้รวมเท่ากับ 100%"
+);
+
+return;
+
 }
-function weekExpenses(){
-  return state.expenses.filter(e=>e.weekStart===state.weekStart);
-}
-function render(){
-  $("income").value=state.income;$("weekStart").value=state.weekStart;
-  for(const k of Object.keys(cats)) $(k).value=state.percentages[k];
-  updateNotice();
-  const a=allocations(), ex=weekExpenses();
-  const spent=ex.reduce((s,e)=>s+e.amount,0), income=state.income;
-  $("incomeStat").textContent=money(income);$("allocatedStat").textContent=money(income);
-  $("spentStat").textContent=money(spent);$("balanceStat").textContent=money(income-spent);
-  $("readyMoney").textContent=money(income);
-  $("allocations").innerHTML=Object.entries(cats).map(([k,c])=>{
-    const amount=a[k], used=ex.filter(e=>e.category===k).reduce((s,e)=>s+e.amount,0);
-    const pct=amount?Math.min(100,used/amount*100):0;
-    return `<div><div class="row"><strong>${c.label}</strong><span>${money(amount)}</span></div>
-      <div class="bar"><div class="fill" style="width:${pct}%"></div></div>
-      <div class="row small"><span>ใช้ไป ${money(used)}</span><span>เหลือ ${money(Math.max(0,amount-used))}</span></div></div>`;
-  }).join("");
-  $("summaryRows").innerHTML=Object.entries(cats).map(([k,c])=>`<div class="row" style="margin:10px 0"><span>${c.label}</span><strong>${money(a[k])}</strong></div>`).join("");
-  $("expenseTable").innerHTML=ex.length?ex.slice().reverse().map((e,i)=>`<tr><td>${e.date}</td><td>${esc(e.name)}</td><td><span class="pill">${cats[e.category].label}</span></td><td>${money(e.amount)}</td><td><button class="danger" onclick="removeExpense('${e.id}')">ลบ</button></td></tr>`).join(""):`<tr><td colspan="5" class="empty">ยังไม่มีรายจ่าย</td></tr>`;
-  $("planHistory").innerHTML=state.plans.length?state.plans.slice().reverse().map((p,i)=>`<tr><td>${p.weekStart}</td><td>${money(p.income)}</td><td>${money(p.balance)}</td><td><button class="secondary" onclick="loadPlan('${p.id}')">เปิด</button></td></tr>`).join(""):`<tr><td colspan="4" class="empty">ยังไม่มีประวัติ</td></tr>`;
-}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]))}
-function addExpense(){
-  const name=$("expenseName").value.trim(), amount=+$("expenseAmount").value||0;
-  if(!name||amount<=0){alert("กรุณากรอกรายการและจำนวนเงินให้ถูกต้อง");return}
-  state.expenses.push({id:crypto.randomUUID(),name,amount,category:$("expenseCategory").value,date:$("expenseDate").value||new Date().toISOString().slice(0,10),weekStart:state.weekStart});
-  save();$("expenseName").value="";$("expenseAmount").value="";render();
-}
-function removeExpense(id){state.expenses=state.expenses.filter(e=>e.id!==id);save();render()}
-function savePlan(){
-  const total=Object.values(getPerc()).reduce((a,b)=>a+b,0);
-  if(total!==100){alert("สัดส่วนต้องรวม 100% ก่อนบันทึก");return}
-  const existing=state.plans.find(p=>p.weekStart===state.weekStart);
-  const balance=state.income-weekExpenses().reduce((s,e)=>s+e.amount,0);
-  const plan={id:existing?.id||crypto.randomUUID(),weekStart:state.weekStart,income:state.income,percentages:getPerc(),balance};
-  if(existing) Object.assign(existing,plan); else state.plans.push(plan);
-  save();render();alert("บันทึกแผนเรียบร้อย");
-}
-function loadPlan(id){const p=state.plans.find(x=>x.id===id);if(!p)return;state.income=p.income;state.weekStart=p.weekStart;state.percentages=p.percentages;save();render()}
-$("calculateBtn").onclick=calc;$("savePlanBtn").onclick=savePlan;$("addExpenseBtn").onclick=addExpense;
-["income","emergency","saving","needs","wants"].forEach(id=>$(id).addEventListener("input",updateNotice));
-$("weekStart").addEventListener("change",()=>{state.weekStart=$("weekStart").value;save();render()});
-$("expenseDate").value=new Date().toISOString().slice(0,10);
-$("resetBtn").onclick=()=>{if(confirm("ต้องการล้างข้อมูลทั้งหมดหรือไม่?")){localStorage.removeItem(KEY);location.reload()}};
-$("exportBtn").onclick=()=>$("modal").classList.add("show");$("closeModal").onclick=()=>$("modal").classList.remove("show");
-$("downloadJson").onclick=()=>{const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="weekly-money-planner-backup.json";a.click();URL.revokeObjectURL(url)};
+
+state.income=
++$("income").value||0;
+
+state.weekStart=
+$("weekStart").value;
+
+state.percentages=p;
+
+save();
+
 render();
+
+}
+
+
+function weekExpenses(){
+
+return state.expenses.filter(
+e=>
+e.weekStart===state.weekStart
+);
+
+}
+
+
+function render(){
+
+$("income").value=
+state.income;
+
+$("weekStart").value=
+state.weekStart;
+
+
+for(
+const k of Object.keys(cats)
+)
+
+$(k).value=
+state.percentages[k];
+
+
+updateNotice();
+
+
+const a=allocations();
+
+const ex=weekExpenses();
+
+
+const spent=
+ex.reduce(
+(s,e)=>s+e.amount,
+0
+);
+
+const income=
+state.income;
+
+
+$("incomeStat")
+.textContent=
+money(income);
+
+$("allocatedStat")
+.textContent=
+money(income);
+
+$("spentStat")
+.textContent=
+money(spent);
+
+$("balanceStat")
+.textContent=
+money(income-spent);
+
+$("readyMoney")
+.textContent=
+money(income);
+
+
+$("allocations")
+.innerHTML=
+
+Object
+.entries(cats)
+.map(
+([k,c])=>{
+
+const amount=a[k];
+
+const used=
+ex
+.filter(
+e=>e.category===k
+)
+.reduce(
+(s,e)=>s+e.amount,
+0
+);
+
+const pct=
+amount
+?
+Math.min(
+100,
+used/amount*100
+)
+:0;
+
+return `
+
+<div>
+
+<div class="row">
+
+<strong>
+${c.label}
+</strong>
+
+<span>
+${money(amount)}
+</span>
+
+</div>
+
+<div class="bar">
+
+<div
+class="fill"
+style="width:${pct}%">
+</div>
+
+</div>
+
+<div class="row small">
+
+<span>
+ใช้ไป ${money(used)}
+</span>
+
+<span>
+เหลือ ${money(Math.max(0,amount-used))}
+</span>
+
+</div>
+
+</div>
+
+`;
+
+}
+
+)
+.join("");
+
+
+$("summaryRows")
+.innerHTML=
+
+Object
+.entries(cats)
+.map(
+([k,c])=>
+
+`<div
+class="row"
+style="margin:10px 0">
+
+<span>
+${c.label}
+</span>
+
+<strong>
+${money(a[k])}
+</strong>
+
+</div>`
+
+)
+.join("");
+
+
+$("expenseTable")
+.innerHTML=
+
+ex.length
+
+?
+
+ex
+.slice()
+.reverse()
+.map(
+(e,i)=>
+
+`<tr>
+
+<td>
+${e.date}
+</td>
+
+<td>
+${esc(e.name)}
+</td>
+
+<td>
+<span class="pill">
+${cats[e.category].label}
+</span>
+</td>
+
+<td>
+${money(e.amount)}
+</td>
+
+<td>
+
+<button
+class="danger"
+onclick="removeExpense('${e.id}')">
+
+ลบ
+
+</button>
+
+</td>
+
+</tr>`
+
+)
+.join("")
+
+:
+
+`<tr>
+
+<td
+colspan="5"
+class="empty">
+
+ยังไม่มีรายจ่าย
+
+</td>
+
+</tr>`;
+
+
+$("planHistory")
+.innerHTML=
+
+state.plans.length
+
+?
+
+state
+.plans
+.slice()
+.reverse()
+.map(
+(p,i)=>
+
+`<tr>
+
+<td>
+${p.weekStart}
+</td>
+
+<td>
+${money(p.income)}
+</td>
+
+<td>
+${money(p.balance)}
+</td>
+
+<td>
+
+<button
+class="secondary"
+onclick="loadPlan('${p.id}')">
+
+เปิด
+
+</button>
+
+</td>
+
+</tr>`
+
+)
+.join("")
+
+:
+
+`<tr>
+
+<td
+colspan="4"
+class="empty">
+
+ยังไม่มีประวัติ
+
+</td>
+
+</tr>`;
+
+}
+
+
+function esc(s){
+
+return String(s)
+.replace(
+/[&<>"']/g,
+m=>
+({
+
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+
+}[m])
+);
+
+}
+
+
+function addExpense(){
+
+const name=
+$("expenseName")
+.value
+.trim();
+
+const amount=
++$("expenseAmount").value||0;
+
+
+if(!name||amount<=0){
+
+alert(
+"กรุณากรอกรายการและจำนวนเงินให้ถูกต้อง"
+);
+
+return;
+
+}
+
+
+state.expenses.push({
+
+id:crypto.randomUUID(),
+
+name,
+
+amount,
+
+category:
+$("expenseCategory").value,
+
+date:
+$("expenseDate").value
+||
+new Date()
+.toISOString()
+.slice(0,10),
+
+weekStart:
+state.weekStart
+
+});
+
+
+save();
+
+$("expenseName").value="";
+
+$("expenseAmount").value="";
+
+render();
+
+}
+
+
+function removeExpense(id){
+
+state.expenses=
+state.expenses.filter(
+e=>e.id!==id
+);
+
+save();
+
+render();
+
+}
+
+
+function savePlan(){
+
+const total=
+Object
+.values(getPerc())
+.reduce(
+(a,b)=>a+b,
+0
+);
+
+
+if(total!==100){
+
+alert(
+"สัดส่วนต้องรวม 100% ก่อนบันทึก"
+);
+
+return;
+
+}
+
+
+const existing=
+state.plans.find(
+p=>
+p.weekStart===state.weekStart
+);
+
+
+const balance=
+state.income-
+weekExpenses()
+.reduce(
+(s,e)=>s+e.amount,
+0
+);
+
+
+const plan={
+
+id:
+existing?.id||
+crypto.randomUUID(),
+
+weekStart:
+state.weekStart,
+
+income:
+state.income,
+
+percentages:
+getPerc(),
+
+balance
+
+};
+
+
+if(existing)
+
+Object.assign(
+existing,
+plan
+);
+
+else
+
+state.plans.push(plan);
+
+
+save();
+
+render();
+
+alert(
+"บันทึกแผนเรียบร้อย"
+);
+
+}
+
+
+function loadPlan(id){
+
+const p=
+state.plans.find(
+x=>x.id===id
+);
+
+if(!p)return;
+
+
+state.income=
+p.income;
+
+state.weekStart=
+p.weekStart;
+
+state.percentages=
+p.percentages;
+
+save();
+
+render();
+
+}
+
+
+$("calculateBtn").onclick=calc;
+
+$("savePlanBtn").onclick=
+savePlan;
+
+$("addExpenseBtn").onclick=
+addExpense;
+
+
+[
+"income",
+"emergency",
+"saving",
+"needs",
+"wants"
+]
+.forEach(
+id=>
+$(id)
+.addEventListener(
+"input",
+updateNotice
+)
+);
+
+
+$("weekStart")
+.addEventListener(
+"change",
+()=>{
+state.weekStart=
+$("weekStart").value;
+
+save();
+
+render();
+
+}
+);
+
+
+$("expenseDate").value=
+new Date()
+.toISOString()
+.slice(0,10);
+
+
+$("resetBtn").onclick=
+()=>{
+
+if(
+confirm(
+"ต้องการล้างข้อมูลทั้งหมดหรือไม่?"
+)
+){
+
+localStorage.removeItem(KEY);
+
+location.reload();
+
+}
+
+};
+
+
+$("exportBtn").onclick=
+()=>
+$("modal")
+.classList
+.add("show");
+
+
+$("closeModal").onclick=
+()=>
+$("modal")
+.classList
+.remove("show");
+
+
+$("downloadJson").onclick=
+()=>{
+
+const blob=
+new Blob(
+[
+JSON.stringify(
+state,
+null,
+2
+)
+],
+{
+type:"application/json"
+}
+);
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"weekly-money-planner-backup.json";
+
+a.click();
+
+URL.revokeObjectURL(url);
+
+};
+
+
+render();
+
 </script>
+
 </body>
 </html>
+```
